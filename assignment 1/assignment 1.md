@@ -71,9 +71,17 @@
 ## 5. Verification Screenshots
 
 - Control Center overview showing Kafka, Connect, and Control Center deployed
+<img width="2559" height="1136" alt="image" src="https://github.com/user-attachments/assets/ad6bbcb9-297c-4ee8-ac05-45b044b309fc" />
+
 - `pageviews` topic in Control Center with messages produced
+<img width="2559" height="1292" alt="image" src="https://github.com/user-attachments/assets/bc32287c-82cb-43e7-b6cf-b4a4e32b4506" />
+
 - Datagen connector (`pageviews`) in Running state
+<img width="1792" height="892" alt="image" src="https://github.com/user-attachments/assets/2b248b6a-f4a0-4167-8bb8-5290958ed705" />
+
 - Optional: Terminal screenshot of `kafka-console-consumer` showing messages
+<img width="586" height="359" alt="image" src="https://github.com/user-attachments/assets/cbfb0cdd-d82f-4487-84b6-0689559372c0" />
+
 
 ## 6. Included Deployment Files
 
