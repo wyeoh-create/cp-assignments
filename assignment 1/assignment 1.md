@@ -42,7 +42,7 @@
 
 7. Verify connector status:
    - `kubectl get connector -n confluent`
-   <img width="586" height="90" alt="image" src="https://github.com/user-attachments/assets/b3e4542c-d6ed-4c20-b7df-685d92147b97" />
+   <img width="476" height="80" alt="image" src="https://github.com/user-attachments/assets/8cd77f97-679f-4c07-aef9-7a4d757861b5" />
 
 8. Verify data flow:
    - Console consumer from `kafka-0` pod **or**
