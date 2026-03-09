@@ -1,4 +1,4 @@
-<img width="673" height="213" alt="image" src="https://github.com/user-attachments/assets/75c9ab15-a402-43a9-a364-e942a8a52a09" /># Assignment 1: From Local to Cloud (Kafka on Kubernetes with CFK + KRaft)
+# Assignment 1: From Local to Cloud (Kafka on Kubernetes with CFK + KRaft)
 
 ## 1. Architecture Overview
 
