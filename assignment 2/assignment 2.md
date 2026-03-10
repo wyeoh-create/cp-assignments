@@ -22,7 +22,7 @@ Components:
 
 Connect Cluster (CFK) with Debezium Plugin
 
-Extend the existing Connect CR from Assignment 1 to install **Datagen** and **Debezium Postgres** from Confluent Hub.
+Extend the existing Connect CR from Assignment 1 to install **Debezium Postgres** from Confluent Hub.
 <img width="569" height="504" alt="image" src="https://github.com/user-attachments/assets/566a4611-a716-49b8-b1ca-43b8d5ad1988" />
 
 
