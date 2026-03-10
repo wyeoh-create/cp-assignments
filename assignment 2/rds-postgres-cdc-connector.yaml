@@ -1,0 +1,53 @@
+apiVersion: platform.confluent.io/v1beta1
+kind: Connector
+metadata:
+  name: rds-postgres-cdc
+  namespace: confluent
+spec:
+  # Debezium Postgres CDC connector
+  class: "io.debezium.connector.postgresql.PostgresConnector"
+  taskMax: 1
+  connectClusterRef:
+    name: connect
+
+  configs:
+    # --- Connection to AWS RDS Postgres ---
+    database.hostname: "database-lab.cqzooevua9cx.ap-southeast-1.rds.amazonaws.com"
+    database.port: "5432"
+    database.user: "postgres"
+    database.password: "password"          # ideally via config provider / secret
+    database.dbname: "appdb"
+    topic.prefix: "rds_appdb"           # prefix for topic names (rds_appdb.public.customers, etc.)
+    database.sslmode: "prefer"
+
+    # --- Debezium CDC settings ---
+    plugin.name: "pgoutput"
+    slot.name: "debezium_rds_appdb"
+    publication.name: "dbz_publication"
+    publication.autocreate.mode: "filtered"     # auto-create for included tables if missing :llmCitationRef[4]
+    table.include.list: "public.customers"
+    snapshot.mode: "initial"                    # snapshot then stream :llmCitationRef[5]
+    # Emit only after-state for simpler downstream use
+    tombstones.on.delete: "false"
+
+    # --- Avro + Schema Registry for downstream consumers ---
+    key.converter: "io.confluent.connect.avro.AvroConverter"
+    key.converter.schema.registry.url: "http://schemaregistry.confluent.svc.cluster.local:8081"
+    value.converter: "io.confluent.connect.avro.AvroConverter"
+    value.converter.schema.registry.url: "http://schemaregistry.confluent.svc.cluster.local:8081"
+
+    # --- SMT pipeline: unwrap Debezium envelope + PII masking ---
+    transforms: "unwrap,maskPII"
+
+    # 1) Debezium ExtractNewRecordState - flatten to just the row fields
+    transforms.unwrap.type: "io.debezium.transforms.ExtractNewRecordState"
+    transforms.unwrap.drop.tombstones: "true"
+    transforms.unwrap.delete.handling.mode: "drop"
+    # optionally add metadata back if needed for auditing:
+    # transforms.unwrap.add.fields: "op,table,lsn,source.ts_ms"
+
+    # 2) MaskField SMT - redact PII columns before they reach Kafka
+    transforms.maskPII.type: "org.apache.kafka.connect.transforms.MaskField$Value"
+    # List the sensitive columns from the unwrapped row
+    transforms.maskPII.fields: "email,phone_number,ssn"
+    transforms.maskPII.replacement: "****"
