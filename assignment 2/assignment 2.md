@@ -25,6 +25,9 @@ Connect Cluster (CFK) with Debezium Plugin
 Extend the existing Connect CR from Assignment 1 to install **Debezium Postgres** from Confluent Hub.
 <img width="569" height="504" alt="image" src="https://github.com/user-attachments/assets/566a4611-a716-49b8-b1ca-43b8d5ad1988" />
 
+Prepare PostgreSQL source table in AWS RDS.
+<img width="494" height="561" alt="image" src="https://github.com/user-attachments/assets/a17cc0ce-bed5-4659-851e-64aa32e3b74f" />
+
 
 ---
 
