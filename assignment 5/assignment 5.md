@@ -27,7 +27,7 @@ ssl.endpoint.identification.algorithm=https
 security.protocol=SASL_SSL
 sasl.mechanism=PLAIN
 sasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required \
-  username="ZOCB75HEOY57XDG2" password="cflt2/5Sb3oOj3M9PCZA3VAiyMpbvJCCsMiemT3IKw6TvDZN9ZmTa9mazSRRvVog";
+  username=<ACCESS KEY> password=<SECRET KEY>;
 auto.create.mirror.topics.enable=true
 consumer.offset.sync.enable=true
 consumer.offset.sync.ms=10000
@@ -53,5 +53,21 @@ Validate the mirror topic in CC
 
 ## 2. Data Ingestion with Self-Managed Connectors 
 One of the use cases follows strict security and networking, hence database connection details are not shareable on fully managed connectors. So the team wants to utilise the Self Managed Kafka Connect cluster to ingest data into a confluent cloud. You need to configure the Connect workers with the necessary Bootstrap Servers and Authentication details for CC. Then, deploy a Source Connector (e.g., SQL Server) on the self-managed cluster to read local data and write it to a CC topic, validating that the data flows correctly.
+
+Create a RDS instance as source
+
+<img width="1314" height="1089" alt="image" src="https://github.com/user-attachments/assets/c9d4facc-0531-4644-a4cb-72528433b672" />
+
+Create new JDBC connector in CP that connect to the source database
+
+<img width="791" height="650" alt="image" src="https://github.com/user-attachments/assets/47cfb509-86ae-416f-b5ec-136eeb50759f" />
+
+Create a client to create and write table
+
+<img width="1045" height="516" alt="image" src="https://github.com/user-attachments/assets/d80bce87-5011-436d-ab92-5bd333af2b5c" />
+
+Verify the topic in CC to ensure the changes have been reflected
+
+<img width="1329" height="1295" alt="image" src="https://github.com/user-attachments/assets/4b3d7329-71e3-4181-8d6f-ee3df9392dac" />
 
 
