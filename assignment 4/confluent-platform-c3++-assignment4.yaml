@@ -75,6 +75,13 @@ spec:
     loadBalancer:
       domain: c3.test.io
   dependencies:
+    schemaRegistry:
+      url: http://schemaregistry.confluent.svc.cluster.local:8081
+    connect:
+    - name: connect
+      url: http://connect.confluent.svc.cluster.local:8083
+    kafka:
+      bootstrapEndpoint: http://kafka.confluent.svc.cluster.local:9071
     prometheusClient:
       url: http://controlcenter-next-gen.confluent.svc.cluster.local:9090
       authentication:
@@ -125,6 +132,12 @@ spec:
         - name: debezium-connector-postgresql
           owner: debezium
           version: 3.1.2
+        - name: kafka-connect-jdbc
+          owner: confluentinc
+          version: 10.8.4
+  dependencies:
+    kafka:
+      bootstrapEndpoint: kafka:9071
 ---
 apiVersion: platform.confluent.io/v1beta1
 kind: SchemaRegistry
